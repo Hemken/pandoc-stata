@@ -1,4 +1,4 @@
-*! version 1.1
+*! version 1.1.1
 *! Doug Hemken
 *! 10 January 2018
 
@@ -57,12 +57,12 @@ display "tables=`tables'"
 		display in error "unknown table type"
 		exit
 			}
-display "ext=`ext'"
+//display "ext=`ext'"
 		}
 	if ("`from'"=="markdown") {
 		local from = "`from'`ext'"
 		}
-display "from=`from'"
+//display "from=`from'"
 	if ("`to'"=="markdown") {
 		local to = "`to'`ext'"
 		}
@@ -87,7 +87,7 @@ display "from=`from'"
 		tempfile stderr
 		local perror 2> `stderr'
 		}
-	! `cmd' `perror'
+	quietly ! `cmd' `perror'
 	if ("`perror'" ~= "") {
 		mata: (void)not_empty("`stderr'")
 		if ("`r(not_empty)'" == "1") {
