@@ -1,13 +1,15 @@
-*! version 1.0
+*! version 1.1
 *! Doug Hemken
-*! 27 December 2017
+*! 10 January 2018
 
+* added more table control, v1.1
 * uses find_pandoc, and mata: not_empty
 
 capture program drop pandoc
 program pandoc, rclass
     syntax anything(name=mdfile), [SAVing(string) replace ///
 			to(string) from(string) ///
+			TABles(string) ///
 			ppath(string) PERRor    ///
 			args(string)]
 	
@@ -36,6 +38,33 @@ program pandoc, rclass
 	}
 	if ("`replace'"=="") {
 		confirm new file "`saving'"
+		}
+display "tables=`tables'"		
+	if ("`tables'"~="") {
+		if ("`tables'"=="nosimple") {
+		local ext = "-simple_tables"
+			}
+		else if ("`tables'"=="nomulti") {
+		local ext = "-multiline_tables"
+			}
+		else if ("`tables'"=="nogrid") {
+		local ext = "-grid_tables"
+			}
+		else if ("`tables'"=="nopipe") {
+		local ext = "-pipe_tables"
+			}
+		else {
+		display in error "unknown table type"
+		exit
+			}
+display "ext=`ext'"
+		}
+	if ("`from'"=="markdown") {
+		local from = "`from'`ext'"
+		}
+display "from=`from'"
+	if ("`to'"=="markdown") {
+		local to = "`to'`ext'"
 		}
 		
 	// pandoc

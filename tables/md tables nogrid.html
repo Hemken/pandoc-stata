@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>md table types</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.line-block{white-space: pre-line;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="four-pandoc-table-types">Four Pandoc table types</h1>
+<p>Pandoc recognizes markdown tables written in four different styles. It recognizes all of these table style by default. These are:</p>
+<ul>
+<li><a href="#pipe-tables">Pipe Tables</a></li>
+<li><a href="#simple-tables">Simple Tables</a></li>
+<li><a href="#multi-line-tables">Multi-line Tables</a></li>
+<li><a href="#grid-tables">Grid Tables</a></li>
+<li><a href="#easter-eggs">Hidden Capabilities</a></li>
+</ul>
+<p>See the <a href="https://pandoc.org/MANUAL.html#tables">Pandoc manual</a> for detailed description of these table types.</p>
+<p>Stata's markdown renderer only recognizes pipe tables.</p>
+<h2 id="pipe-tables">Pipe Tables</h2>
+<p>Demonstration of pipe table syntax, from the Pandoc manual.</p>
+<p>The markdown is written:</p>
+<pre><code>| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |</code></pre>
+<p>which is rendered as:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Right</th>
+<th style="text-align: left;">Left</th>
+<th>Default</th>
+<th style="text-align: center;">Center</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">12</td>
+<td>12</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">123</td>
+<td style="text-align: left;">123</td>
+<td>123</td>
+<td style="text-align: center;">123</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
+<td>1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="simple-tables">Simple Tables</h2>
+<p>Are <strong><em>not</em></strong> rendered in Stata. They would be written like this:</p>
+<pre><code>  Right     Left     Center     Default
+-------     ------ ----------   -------
+     12     12        12            12
+    123     123       123          123
+      1     1          1             1
+
+Table:  Demonstration of simple table syntax.</code></pre>
+<p>and rendered as</p>
+<table>
+<caption>Demonstration of simple table syntax.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Right</th>
+<th style="text-align: left;">Left</th>
+<th style="text-align: center;">Center</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: center;">12</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">123</td>
+<td style="text-align: left;">123</td>
+<td style="text-align: center;">123</td>
+<td>123</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: center;">1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="multi-line-tables">Multi-line Tables</h2>
+<p>Are <strong><em>not</em></strong> rendered in Stata. They would be written like this:</p>
+<pre><code>-------------------------------------------------------------
+ Centered   Default           Right Left
+  Header    Aligned         Aligned Aligned
+----------- ------- --------------- -------------------------
+   First    row                12.0 Example of a row that
+                                    spans multiple lines.
+
+  Second    row                 5.0 Here&#39;s another one. Note
+                                    the blank line between
+                                    rows.
+-------------------------------------------------------------
+
+Table: Here&#39;s the caption. It, too, may span
+multiple lines.</code></pre>
+<p>Rendered as</p>
+<table style="width:85%;">
+<caption>Here’s the caption. It, too, may span multiple lines.</caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 11%" />
+<col style="width: 22%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Centered Header</th>
+<th>Default Aligned</th>
+<th style="text-align: right;">Right Aligned</th>
+<th style="text-align: left;">Left Aligned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">First</td>
+<td>row</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: left;">Example of a row that spans multiple lines.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Second</td>
+<td>row</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: left;">Here’s another one. Note the blank line between rows.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="grid-tables">Grid Tables</h2>
+<p>Are <strong><em>not</em></strong> rendered in Stata. They would be written like this:</p>
+<pre><code>:Sample grid table.
+
++---------------+---------------+--------------------+
+| Fruit         | Price         | Advantages         |
++===============+===============+====================+
+| Bananas       | $1.34         | - built-in wrapper |
+|               |               | - bright color     |
++---------------+---------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     |
+|               |               | - tasty            |
++---------------+---------------+--------------------+</code></pre>
+<p>Rendered as</p>
+<p>:Sample grid table.</p>
+<p>+—————+—————+——————–+ | Fruit | Price | Advantages | +===============+===============+====================+ | Bananas | $1.34 | - built-in wrapper | | | | - bright color | +—————+—————+——————–+ | Oranges | $2.10 | - cures scurvy | | | | - tasty | +—————+—————+——————–+</p>
+<h2 id="easter-eggs">Easter Eggs</h2>
+<p>Not really documented in Stata, several commands produce piped table output.</p>
+<ul>
+<li>_coef_table</li>
+<li>estimates table</li>
+<li>tabulate</li>
+<li>tabstat</li>
+</ul>
+<p>Just add a <code>markdown</code> option to each command!</p>
+<ul>
+<li>mata: matrixmarkdown</li>
+<li>mata: datamarkdown</li>
+</ul>
+</body>
+</html>

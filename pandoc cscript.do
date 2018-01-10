@@ -17,3 +17,26 @@ assert _rc==602
 pandoc index.md, replace args(-toc) perror
 * No error
 pandoc index.md, replace args(--toc) perror
+
+* Tables tests
+pandoc "tables/md table types.md", saving("tables/md tables default.html") replace
+
+pandoc "tables/md table types.md", saving("tables/md tables nosimple.html") ///
+	tables("nosimple") replace
+	
+pandoc "tables/md table types.md", saving("tables/md tables nopipe.html") ///
+	tables("nopipe") replace
+	
+pandoc "tables/md table types.md", saving("tables/md tables nomulti.html") ///
+	tables("nomulti") replace
+	
+pandoc "tables/md table types.md", saving("tables/md tables nogrid.html") ///
+	tables("nogrid") replace
+	
+* Other output types
+pandoc "tables/md table types.md", saving("tables/md tables default.pdf") ///
+	to("pdf") replace
+
+pandoc "tables/md table types.md", saving("tables/md tables default.docx") ///
+	to("docx") replace
+
